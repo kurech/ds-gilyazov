@@ -36,7 +36,7 @@
 
 ```bash
 git clone https://github.com/kurech/ds-gilyazov.git
-cd predictive_maintenance_project
+cd ds-gilyazov
 ```
 
 2. Создайте и активируйте виртуальное окружение (опционально):
@@ -66,7 +66,7 @@ streamlit run app.py
 ## 🗂 Структура репозитория
 
 ```bash
-predictive_maintenance_project/
+ds-gilyazov/
 │
 ├── app.py                  # Главный файл Streamlit-приложения
 ├── analysis_and_model.py  # Страница анализа данных, моделей и предсказаний
