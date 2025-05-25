@@ -25,7 +25,6 @@ def analysis_and_model_page():
         data.drop(columns=['UDI', 'Product ID', 'TWF', 'HDF', 'PWF', 'OSF', 'RNF'], inplace=True)
         data['Type'] = LabelEncoder().fit_transform(data['Type'])
 
-        # Переименование столбцов — обязательно для XGBoost
         data.rename(columns={
             'Air temperature [K]': 'AirTemperature',
             'Process temperature [K]': 'ProcessTemperature',
@@ -34,7 +33,6 @@ def analysis_and_model_page():
             'Tool wear [min]': 'ToolWear'
         }, inplace=True)
 
-        # Масштабирование
         numerical = ['AirTemperature', 'ProcessTemperature', 'RotationalSpeed', 'Torque', 'ToolWear']
         scaler = StandardScaler()
         data[numerical] = scaler.fit_transform(data[numerical])
@@ -44,7 +42,6 @@ def analysis_and_model_page():
         y = data['Machine failure']
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        # Обучение моделей
         models = {
             "Logistic Regression": LogisticRegression(),
             "Random Forest": RandomForestClassifier(n_estimators=100, random_state=42),
@@ -80,7 +77,6 @@ def analysis_and_model_page():
             sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=ax)
             st.pyplot(fig)
 
-        # График ROC-кривых
         st.subheader("ROC-кривые")
         fig, ax = plt.subplots()
         for name, res in results.items():
@@ -92,7 +88,6 @@ def analysis_and_model_page():
         ax.legend()
         st.pyplot(fig)
 
-        # Предсказание
         st.header("Предсказание по новым данным")
         with st.form("prediction_form"):
             st.write("Введите значения признаков:")
